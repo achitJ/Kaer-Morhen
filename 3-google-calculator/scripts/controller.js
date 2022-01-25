@@ -55,6 +55,12 @@ const compute = function() {
 const input = function(event) {
 
     const inputDiv = document.querySelector('input');
+    
+    if(event.target.tagName != 'BUTTON') {
+
+        return;
+    }
+    
     const key = event.target.innerText;
 
     const isOperator = function(key) {
