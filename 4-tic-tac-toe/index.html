@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+
+    <style>
+        body {
+
+            font: 14px 'Century Gothic', Futura, sans-serif;
+            margin: 20px;
+        }
+
+        .square {
+
+            background: #fff;
+            border: 1px solid #999;
+            float: left;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 34px;
+            height: 34px;
+            margin-right: -1px;
+            margin-top: -1px;
+            padding: 0;
+            text-align: center;
+            width: 34px;
+        }
+
+        .square:focus {
+
+            outline: none;
+        }
+
+        .board-row:after {
+            clear: both;
+            content: '';
+            display: table;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="status">It's <span>X</span>'s Turn</h3>
+
+    <div class="board">
+        <div class="board-row">
+            <div class="square" id="0"></div>
+            <div class="square" id="1"></div>
+            <div class="square" id="2"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="square" id="3"></div>
+            <div class="square" id="4"></div>
+            <div class="square" id="5"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="square" id="6"></div>
+            <div class="square" id="7"></div>
+            <div class="square" id="8"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
