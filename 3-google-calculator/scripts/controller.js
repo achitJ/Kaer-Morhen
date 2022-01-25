@@ -33,23 +33,23 @@ const compute = function() {
     const inputDiv = document.querySelector('input');
     const input = inputDiv.value;
 
-    inputDiv.value = '';
-
+    
     if(!valid(input)) {
-
+        
         return alert("Please enter a valid expression");
     }
-
+    
     const calculatedAns = calculate(input);
-
+    
     if(isNaN(calculatedAns)) {
-
+        
         return alert("Please enter a valid expression");
     }
-
+    
     const output = document.querySelector('#output > span');
-
+    
     output.innerText = calculatedAns;
+    inputDiv.value = '';
 }
 
 const input = function(event) {
