@@ -3,7 +3,7 @@ export let calculate = function(str) {
     //remove spaces
     str = str.replace(/\s/g, '');
 
-    //reducing the multiplication and division
+    //reducing the multiplication and division so that we only have to add the numbers
     const evaluate = function(stack, prevSign, num) {
 
         if(prevSign === '+') {
@@ -45,6 +45,7 @@ export let calculate = function(str) {
                 currNum += str[index];
             }
 
+            //evaluate the current answer
             else if(str[index] === '+' || str[index] === '-' || str[index] === '*' || str[index] === '/') {
 
                 currNum = parseFloat(currNum);
@@ -54,6 +55,7 @@ export let calculate = function(str) {
                 currNum = '';
             }
 
+            //if we find a closing bracket, send the subsequent string to recursion
             else if(str[index] === '(') {
 
                 const curr = compute(str, index + 1);
@@ -62,8 +64,9 @@ export let calculate = function(str) {
                 index = curr.index - 1;
             }
 
+            //return from recursion
             else if(str[index] === ')') {
-                
+
                 currNum = parseFloat(currNum);
                 evaluate(stack, prevSign, currNum);
                 return { value: stack.reduce((sum, curr) => sum + curr), index: index + 1 };
