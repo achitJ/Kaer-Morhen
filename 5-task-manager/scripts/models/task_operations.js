@@ -1,51 +1,46 @@
 // CRUD
 
-import Task from './task.js';
+import { Task } from './task.js'
 
-const taskOperations = {
-    
-    tasks:[],
+export const taskOperations = {
+  tasks: [],
 
-    add(id, name, description, date) {
+  searchedTasks: [],
 
-        const task = new Task(id, name, description, date);
-        this.tasks.push(task);
-        // console.log("Added", task);
+  add(id, name, description, date) {
+    const task = new Task(id, name, description, date)
+    this.tasks.push(task)
 
-        return task;
-    },
+    return task
+  },
 
-    mark(id) {
+  deleteMarked() {
+    this.tasks = this.tasks.filter((task) => !task.isMarked)
 
-        for(let index = 0; index < this.tasks.length; index++) {
+    return this.tasks
+  },
 
-            if(this.tasks[index].id == id) {
+  mark(id) {
+    const task = this.tasks.find((task) => task.id === id)
 
-                let taskObject = this.tasks[index];
-                taskObject.isMarked = !taskObject.isMarked;
-            }
-        }
-    },
+    if (task) task.toggle()
+  },
 
-    countMarked() {
+  countMarked() {
+    const unmarkedArray = this.tasks.filter((task) => task.isMarked)
 
-        let count = 0;
+    return unmarkedArray.length
+  },
 
-        for(let i = 0; i < this.tasks.length; i++) {
+  countUnmarked() {
+    return this.tasks.length - this.countMarked()
+  },
 
-            if(this.tasks[i].isMarked) {
+  searchTasks(searchItem) {
+    this.searchedTasks = this.tasks.filter((task) =>
+      task.name.toLowerCase().includes(searchItem.toLowerCase())
+    )
 
-                count++;
-            }
-        }
-
-        return count;
-    },
-
-    countUnmarked() {
-
-        return this.tasks.length - this.countMarked();
-    }
-};
-
-export default taskOperations;
+    return this.searchedTasks
+  },
+}
