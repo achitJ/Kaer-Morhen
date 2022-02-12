@@ -10,8 +10,6 @@
 //         }
 
 //         let sum = args.reduce((acc, curr) => {
-            
-
 
 //             return acc + parseFloat(curr);
 //         }, 0);
@@ -30,24 +28,33 @@
 //     }
 // }
 
+//flatten array
+//const arr = [
+//     [1,2,3],
+//     [[[5,6]]],
+//     [7,8,9]
+// ];
+
+// arr.toString().split(',').map((e) => Number(e));
+
 // function curry(fn) {
 
 //     return function inCurry(...args) {
-  
+
 //     //   if(args.length >= fn.length) {
-        
+
 //     //     return fn(...args);
 //     //   }
-  
+
 //     //   else {
-        
+
 //         return function(...args2) {
-  
+
 //           return inCurry(...args, ...args2);
 //         }
 //     //   }
 //     }
-    
+
 // }
 
 // const sumCurry = curry(sum);
@@ -57,7 +64,7 @@
 // let x = 2;
 
 // const lmao = function lmao(y = x, x) {
-    
+
 //     // x = 10;
 //     console.log(x);
 // }
@@ -106,15 +113,35 @@
 //     return ans;
 // }
 
-// console.log(JSON.stringify(data));
+//BIND POLYFILL
 
+// let obj = {
+//   name: 'Jack',
+// }
+
+// let myFunc = function (id, city) {
+//   console.log(`${this.name}, ${id}, ${city}`) // id will be undefined
+// }
+
+// // Accepting any number of arguments passed to myBind
+// Function.prototype.myBind = function (obj, ...args) {
+//   let func = this
+//   // Accepting arguments passed to newFunc
+//   return function (...newArgs) {
+//     func.apply(obj, [...args, ...newArgs])
+//   }
+// }
+
+// let newFunc = myFunc.myBind(obj, 'a_random_id')
+// newFunc('New York') // Jack, a_random_id, New York
+
+// console.log(JSON.stringify(data));
 
 // function calculator(initVal = 0) {
 
 //     let ans = parseFloat(initVal);
 
-//     try {    
-
+//     try {
 
 //         if(isNaN(ans)) {
 
@@ -152,8 +179,8 @@
 //         this.val = () => ans;
 
 //         return this;
-//     } 
-    
+//     }
+
 //     catch(error) {
 
 //         return console.error(error);
@@ -166,10 +193,10 @@
 //123,456,789.456789 <- output
 
 // function convertToLocaleString(num) {
-    
+
 //     const str = num.toString();
 //     const dec = str.split('.');
-    
+
 //     return dec[0] + '.' + dec[1];
 // }
 
@@ -203,144 +230,244 @@
 
 // console.log(lmao.b.d.e.f);
 
+// const myJSON = {
 
+//     addBracket(currObj, isOpening = true) {
 
-const myJSON = {
+//         if(Array.isArray(currObj)) {
 
-    addBracket(currObj, isOpening = true) {
+//             if(isOpening) return '[';
+//             else return ']';
+//         }
 
-        if(Array.isArray(currObj)) {
+//         else {
 
-            if(isOpening) return '[';
-            else return ']';
-        } 
-        
-        else {
-    
-            if(isOpening) return '{';
-            else return '}';
-        }
-    },
+//             if(isOpening) return '{';
+//             else return '}';
+//         }
+//     },
 
-    getString(currObj) {
+//     getString(currObj) {
 
-        if(currObj === null) return 'null';
-        if(currObj instanceof Date) return `"${currObj.toISOString()}"`;
-        if(typeof currObj === 'object') return currObj;
-        if(currObj === NaN) return 'null';
-        if(typeof currObj === 'string') return `"${currObj}"`;
-        if(typeof currObj === 'number') return currObj.toString();
-        if(typeof currObj === 'boolean') return currObj.toString();
-        if(typeof currObj === 'function' || currObj === undefined) return undefined;
-    },
+//         if(currObj === null) return 'null';
+//         if(currObj instanceof Date) return `"${currObj.toISOString()}"`;
+//         if(typeof currObj === 'object') return currObj;
+//         if(currObj === NaN) return 'null';
+//         if(typeof currObj === 'string') return `"${currObj}"`;
+//         if(typeof currObj === 'number') return currObj.toString();
+//         if(typeof currObj === 'boolean') return currObj.toString();
+//         if(typeof currObj === 'function' || currObj === undefined) return undefined;
+//     },
 
-    stringify(obj = null, isCurrArray = false) {
+//     stringify(obj = null, isCurrArray = false) {
 
-        if(obj === null) return 'null';
-        if(typeof obj === 'string') return `"${obj}"`;
-        if(typeof obj === 'number') return obj.toString();
-        if(typeof obj === 'boolean') return obj.toString();
-        if(typeof obj === 'function' || obj === undefined) return undefined;
-        
-        let flag = false;
-        let objString = '';
-        
-        objString += this.addBracket(obj);
-        
-        if(Array.isArray(obj)) isCurrArray = true;
-        
-        for (const key in obj) {
-            
-            if(flag) objString += `,`;
-            else flag = true;
+//         if(obj === null) return 'null';
+//         if(typeof obj === 'string') return `"${obj}"`;
+//         if(typeof obj === 'number') return obj.toString();
+//         if(typeof obj === 'boolean') return obj.toString();
+//         if(typeof obj === 'function' || obj === undefined) return undefined;
 
-            const value = this.getString(obj[key]);
+//         let flag = false;
+//         let objString = '';
 
-            console.log(value);
+//         objString += this.addBracket(obj);
 
-            if(value === undefined /*|| typeof value === 'function'*/) continue;
-            
-            if(!isCurrArray) objString += `"${key}":`;
-            
-            // if(typeof value === 'boolean' || typeof value === 'number') {
+//         if(Array.isArray(obj)) isCurrArray = true;
 
-            //     objString += `${value}`;
-            // }
+//         for (const key in obj) {
 
-            if (typeof value === 'object') {
+//             if(flag) objString += `,`;
+//             else flag = true;
 
-                // if(value === null ) {
+//             const value = this.getString(obj[key]);
 
-                //     objString += `null`;
-                // }
+//             console.log(value);
 
-                if(Array.isArray(value)) {
+//             if(value === undefined /*|| typeof value === 'function'*/) continue;
 
-                    objString += this.stringify(value, true);
-                }
+//             if(!isCurrArray) objString += `"${key}":`;
 
-                // else if(value instanceof Date) {
+//             // if(typeof value === 'boolean' || typeof value === 'number') {
 
-                //     objString += `"${value.toISOString()}"`;
-                // }
+//             //     objString += `${value}`;
+//             // }
 
-                else {
+//             if (typeof value === 'object') {
 
-                    objString += `${this.stringify(value)}`;
-                }
-            } 
-            
-            else {
+//                 // if(value === null ) {
 
-                objString += value;
-            }           
-                      
-        }
+//                 //     objString += `null`;
+//                 // }
 
-        objString += this.addBracket(obj, false);
+//                 if(Array.isArray(value)) {
 
-        return objString;
-    },
+//                     objString += this.stringify(value, true);
+//                 }
 
-    JSONparse(str) {
-        
-        
-    }
-};
+//                 // else if(value instanceof Date) {
 
-const testObj = {
+//                 //     objString += `"${value.toISOString()}"`;
+//                 // }
 
-    a: true,
-    b: {
-        c: 'sparrow',
-        d: {
-            e: 'hahaha'
-        }
-    },
-    f: [1,2,3,4,5,6,7,8,9,10],
-    g: [
-        {a:"awd"},
-        {b:"ads"}
-    ]
-}
+//                 else {
 
-const testObj2 = {
+//                     objString += `${this.stringify(value)}`;
+//                 }
+//             }
 
-    a: 'jack',
-    b: {
-        c: 'sparrow',
-        d: {
-            e: 'hahaha'
-        }
-    },
-}
+//             else {
 
-const testObj3 = [1,2,3,4,5,6,7,8,9,10];
+//                 objString += value;
+//             }
+
+//         }
+
+//         objString += this.addBracket(obj, false);
+
+//         return objString;
+//     },
+
+//     JSONparse(str) {
+
+//     }
+// };
+
+// const testObj = {
+
+//     a: true,
+//     b: {
+//         c: 'sparrow',
+//         d: {
+//             e: 'hahaha'
+//         }
+//     },
+//     f: [1,2,3,4,5,6,7,8,9,10],
+//     g: [
+//         {a:"awd"},
+//         {b:"ads"}
+//     ]
+// }
+
+// const testObj2 = {
+
+//     a: 'jack',
+//     b: {
+//         c: 'sparrow',
+//         d: {
+//             e: 'hahaha'
+//         }
+//     },
+// }
+
+// const testObj3 = [1,2,3,4,5,6,7,8,9,10];
+
+// // console.log(myJSON.stringify(testObj));
+
+// function help() {
+//     return 1;
+// }
 
 // console.log(myJSON.stringify(testObj));
 
-function help() {
-    return 1;
-}
+// const arr = [1, 2, 3, 4, 5]
+// undefined
+// arr.forEach((element) => console.log(element))
+// console.log('lmao')
 
-console.log(myJSON.stringify(testObj));
+//SET INTERVAL
+// function createSetIntervalPolyfillTask() {
+//   let intervalIdIncre = 0
+//   const intervalIdMap = {}
+
+//   function polyfilledSetInterval(callback, delay, ...args) {
+//     const uniqueId = intervalIdIncre++
+
+//     function repeatThisFn() {
+//       intervalIdMap[uniqueId] = setTimeout(() => {
+//         callback(...args)
+
+//         if (intervalIdMap[uniqueId]) {
+//           repeatThisFn()
+//         }
+//       }, delay)
+//     }
+
+//     repeatThisFn()
+
+//     return uniqueId
+//   }
+
+//   function polyfilledClearInterval(uniqueId) {
+//     clearTimeout(intervalIdMap[uniqueId])
+
+//     delete intervalIdMap[uniqueId]
+//   }
+
+//   return {
+//     polyfilledSetInterval,
+//     polyfilledClearInterval,
+//   }
+// }
+
+// const { polyfilledSetInterval, polyfilledClearInterval } =
+//   createSetIntervalPolyfillTask()
+
+// let counter = 0
+
+// const uniqueId = polyfilledSetInterval(() => {
+//   console.log('Madhav madarchod')
+
+//   counter++
+
+//   if (counter > 4) {
+//     polyfilledClearInterval(uniqueId)
+//   }
+// }, 1000)
+
+// What is Debouncing? Where used?
+// And how to implement.
+
+// API call
+// Listener kamm call honge
+// Performance Increase.
+// API call, Advantages ?
+// re rendering kamm ho gyii
+// server load kamm hogya.
+// user convenience. UX better hogya.
+// load time kamm hogya ?
+// Thread blockage => re rendering kamm ho gyii
+
+// function debounceFn(callingFn,delay) {
+//     const myThis = this;
+//     let timerId = 0;
+//     return function(...args) {
+//         clearTimeout(timerId);
+
+//         timerId = setTimeout(() => {
+//             callingFn.apply(myThis ,args);
+//         },delay);
+//     }
+// }
+
+//this above function will always have a bug that everytime
+//we call it, it will clear the timer and set a new timer. So if someone performs
+//the action fast enough, api will never be called. This is called starvation stage
+
+// function throttlingFn(callingFn, delay) {
+//   const myThis = this
+//   let isWaiting = false
+
+//   return function (...args) {
+//     if (!isWaiting) {
+//       callingFn.apply(myThis, args)
+//       isWaiting = true
+//     }
+
+//     timerId = setTimeout(() => {
+//       isWaiting = false
+//     }, delay)
+//   }
+// }
+
+//this above function uses throttling, in this there will never be starvation as
+//it will wait for the delay to complete before calling the api and not clear the timeout.
