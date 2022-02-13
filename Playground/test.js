@@ -471,3 +471,68 @@
 
 //this above function uses throttling, in this there will never be starvation as
 //it will wait for the delay to complete before calling the api and not clear the timeout.
+
+// const intervalTask = function () {
+//   const idMap = {}
+//   let uniqueIdInc = 0
+
+//   const mySetInterval = function (callback, delay, ...args) {
+//     const uniqueId = uniqueIdInc++
+
+//     function repeatMe() {
+//       idMap[uniqueId] = setTimeout(() => {
+//         callback(...args)
+
+//         if (idMap[uniqueId]) {
+//           repeatMe()
+//         }
+//       }, delay)
+//     }
+
+//     repeatMe()
+//     return uniqueId
+//   }
+
+//   const myClearInterval = function (id) {
+//     clearTimeout(idMap[id])
+//     delete idMap[id]
+//   }
+
+//   return { mySetInterval, myClearInterval }
+// }
+
+// const { mySetInterval, myClearInterval } = intervalTask()
+
+// let counter = 0
+
+// const uniqueId = mySetInterval(() => {
+//   console.log('lol')
+
+//   counter++
+
+//   if (counter > 4) {
+//     myClearInterval(uniqueId)
+//   }
+// }, 1000)
+
+// const groupBy = function (arr, fn) {
+//   const result = {}
+
+//   arr.forEach((element, idx) => {
+//     const key = fn(element)
+
+//     if (!result[key]) {
+//       result[key] = []
+//       result[key].push(element)
+//     } else {
+//       result[key].push(element)
+//     }
+//   })
+
+//   return result
+// }
+
+// let users = [6.5, 4.12, 6.8, 5.4]
+// let groupedData = groupBy(users, Math.floor)
+
+// console.log(groupedData)

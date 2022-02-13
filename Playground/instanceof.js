@@ -21,8 +21,9 @@ function instanceOf(obj = null, Construct = null) {
 
   if (Object.getPrototypeOf(obj) === Construct.prototype) return true
 
-  return instanceOf(Object.getPrototypeOf(obj))
+  return instanceOf(Object.getPrototypeOf(obj), Construct)
 }
 
-instanceOf(a, A) // true
-instanceOf(b, A) // false
+console.log(instanceOf(a, A)) // true
+console.log(instanceOf(b, A)) // false
+console.log(instanceOf(b, Object)) // true

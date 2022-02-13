@@ -7,9 +7,7 @@ let myFunc = function (id, city) {
 }
 
 Function.prototype.myBind = function (obj, ...args) {
-  let func = this
-
-  return function (...newArgs) {
+  return (...newArgs) => {
     func.apply(obj, [...args, ...newArgs])
   }
 }
