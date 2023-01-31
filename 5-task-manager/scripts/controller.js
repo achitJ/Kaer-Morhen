@@ -2,13 +2,20 @@
 import { taskOperations } from './models/task_operations.js'
 import { showAlert } from './utils/dialog.js'
 import { Task } from './models/task.js'
+import { counter } from './utils/counter.js'
+import { fireBaseOperations } from './utils/firebase-crud.js'
 
 window.addEventListener('load', init)
 
 function init() {
   bindEvents()
   showCounts()
-  focus('id')
+  showCounter()
+  focus('name')
+}
+
+function showCounter() {
+  document.querySelector('#id').innerText = counter.next().value
 }
 
 function bindEvents() {
@@ -23,7 +30,7 @@ function bindEvents() {
 
 const addTask = function () {
   //read the fields
-  let id = document.querySelector('#id').value
+  let id = document.querySelector('#id').innerText
   let name = document.querySelector('#name').value
   let description = document.querySelector('#description').value
   let date = document.querySelector('#date').value
@@ -33,7 +40,8 @@ const addTask = function () {
   printTask(task)
   showCounts()
   clearAll()
-  focus('id')
+  focus('name')
+  showCounter()
 }
 
 const deleteTask = function () {
@@ -44,6 +52,8 @@ const deleteTask = function () {
 }
 
 function saveTask() {
+  fireBaseOperations.add()
+
   let tasks = taskOperations.tasks
 
   if (window.localStorage) {
@@ -78,8 +88,12 @@ function loadTask() {
 }
 
 const searchTasks = function () {
+  const searchKey = document.querySelector('#searchedKey').value
   const searchItem = document.querySelector('#searchedTask').value
-  const tasks = taskOperations.searchTasks(searchItem)
+
+  if (searchKey === 'Select Search Key') return
+
+  const tasks = taskOperations.searchTasks(searchKey, searchItem)
 
   printTasks(tasks)
   showCounts()
@@ -93,7 +107,7 @@ const clearSearch = () => {
 
 const clearFields = () => {
   clearAll()
-  focus('id')
+  focus('name')
 }
 
 function showCounts() {
@@ -123,7 +137,7 @@ function toggleDelete() {
 }
 
 function edit() {
-  console.log('edit')
+  console.log(this)
 }
 
 function printTasks(tasks) {

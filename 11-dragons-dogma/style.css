@@ -1,0 +1,21 @@
+#dragon {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  width: 20rem;
+  /* transform: scaleX(-1); */
+}
+
+.dragon {
+  transition: transform linear 100ms;
+  display: inline-block;
+  transform: translateX(0px);
+}
+
+.flip-dragon-right {
+  transform: scaleX(-1);
+}
+
+.flip-dragon-left {
+  transform: scaleX(1);
+}

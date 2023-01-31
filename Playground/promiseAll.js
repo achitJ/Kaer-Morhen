@@ -36,7 +36,7 @@ async function promiseAllSettled(promises) {
     }
   }
 
-  return Promise.all(results)
+  return promiseAll(results)
 }
 
 let promises = []
@@ -65,7 +65,6 @@ for (let idx = 1; idx <= 10; idx++) {
 
 promiseAllSettled(promises)
   .then((results) => {
-    console.log('lmao')
     console.log(results)
   })
   .catch((err) => {

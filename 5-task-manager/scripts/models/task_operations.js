@@ -36,11 +36,22 @@ export const taskOperations = {
     return this.tasks.length - this.countMarked()
   },
 
-  searchTasks(searchItem) {
+  searchTasks(searchKey, searchItem) {
     this.searchedTasks = this.tasks.filter((task) =>
-      task.name.toLowerCase().includes(searchItem.toLowerCase())
+      task[searchKey].toLowerCase().includes(searchItem.toLowerCase())
     )
 
     return this.searchedTasks
+  },
+
+  editTask(id, name, description, date, url) {
+    const task = this.tasks.find((task) => task.id === id)
+
+    if (task) {
+      task.name = name
+      task.description = description
+      task.date = date
+      task.url = url
+    }
   },
 }

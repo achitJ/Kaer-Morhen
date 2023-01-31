@@ -1,0 +1,28 @@
+body {
+  font-size: 2rem;
+  background-color: #252526;
+  color: #fff;
+}
+
+i {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+li {
+  white-space: pre;
+  list-style: none;
+}
+
+li::marker {
+  content: '\00BB';
+  color: white;
+}
+
+.fileNav {
+  user-select: none;
+}
+
+.collapse {
+  display: none;
+}

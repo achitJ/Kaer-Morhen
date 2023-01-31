@@ -1,3 +1,18 @@
+document
+  .querySelector('#debounce')
+  .addEventListener('keyup', debounceFn(printIndex))
+
+document
+  .querySelector('#throttle')
+  .addEventListener('keyup', throttleFn(printIndex))
+
+let index = 0
+
+function printIndex(e) {
+  console.log(e)
+  console.log(index++)
+}
+
 // What is Debouncing? Where used?
 // And how to implement.
 
@@ -11,7 +26,7 @@
 // load time kamm hogya ?
 // Thread blockage => re rendering kamm ho gyii
 
-function debounceFn(callingFn, delay) {
+function debounceFn(callingFn, delay = 1000) {
   const myThis = this
   let timerId = 0
   return function (...args) {
@@ -27,7 +42,7 @@ function debounceFn(callingFn, delay) {
 //we call it, it will clear the timer and set a new timer. So if someone performs
 //the action fast enough, api will never be called. This is called starvation stage
 
-function throttlingFn(callingFn, delay) {
+function throttleFn(callingFn, delay = 1000) {
   const myThis = this
   let isWaiting = false
 
@@ -35,11 +50,11 @@ function throttlingFn(callingFn, delay) {
     if (!isWaiting) {
       callingFn.apply(myThis, args)
       isWaiting = true
-    }
 
-    timerId = setTimeout(() => {
-      isWaiting = false
-    }, delay)
+      setTimeout(() => {
+        isWaiting = false
+      }, delay)
+    }
   }
 }
 
