@@ -38,6 +38,10 @@ const appDirs = [
     {
         name: "Dragons Dogma",
         location: "./11-dragons-dogma/index.html"
+    },
+    {
+        name: "Book Binder",
+        location: "./12-book-binder/index.html"
     }
 ];
 

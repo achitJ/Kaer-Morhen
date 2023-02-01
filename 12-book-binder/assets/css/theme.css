@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
+* {
+    box-sizing: border-box;
+
+    /* font */
+    font-family: 'Varela', sans-serif;
+
+    /* Font sizes */
+    --textMedium: 16px;
+    --textSmall: 8px;
+    --textExtraSmall: 4px;
+    --textLarge: 24px;
+    --textExtraLarge: 32px;
+}
